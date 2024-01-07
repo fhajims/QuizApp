@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupQuestion() {
         if (questions != null) {
             val min = 0
-            val max = questions.size
+            val max = questions.size-1
             randomInt = (min..max).random()
             //val question = questions[randomInt]
             currentQuestion = questions[randomInt]
@@ -109,6 +109,7 @@ class MainActivity : AppCompatActivity() {
 
         jumpScareSound.setOnCompletionListener {
             it.release()
+
         }
 
         jumpScareSound.start()
@@ -118,6 +119,7 @@ class MainActivity : AppCompatActivity() {
 
         rightAnswerSound.setOnCompletionListener {
             it.release()
+
         }
 
         rightAnswerSound.start()
@@ -127,6 +129,7 @@ class MainActivity : AppCompatActivity() {
 
         goatySound.setOnCompletionListener {
             it.release()
+
         }
 
         goatySound.start()
@@ -175,19 +178,20 @@ class MainActivity : AppCompatActivity() {
             makeImageViewVisible(mrb)
             handler.postDelayed({
                 mrb.visibility = View.GONE
+                updateUIElements(questions,randomInt)
             }, delayMillis.toLong())
-                handler.postDelayed({
+              /*  handler.postDelayed({
                     // This code will run after the delay
                     //val intent = Intent(this, MainActivity::class.java)
                     //startActivity(intent)
                     //finish()
-                    updateUIElements(questions,randomInt)
-                }, 6000.toLong())
+
+                }, 6000.toLong()) */
         } else {
             Toast.makeText(this, "Incorrect. Try again!", Toast.LENGTH_SHORT).show()
             val  delayMillis = 3000
             playGoaty(this)
-            playJumpScare(this)
+            //playJumpScare(this)
             val dagoat = findViewById<ImageView>(R.id.goatygoat)
             //val mrb = findViewById<ImageView>(R.id.mrb)
             //loadGoatyIntoImageView(mrb, "goat");
@@ -195,6 +199,7 @@ class MainActivity : AppCompatActivity() {
             handler.postDelayed({
                 dagoat.visibility = View.GONE
             }, delayMillis.toLong())
+
 
         }
 
